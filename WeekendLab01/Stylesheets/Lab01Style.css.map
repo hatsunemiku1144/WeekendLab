@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAC,AAAA,eAAe,CAAC,GAAG,CAAC;EACjB,MAAM,EAAE,IAAI;CACb;;AACD,AAAA,UAAU,CACV;EACE,OAAO,EAAE,mBAAmB;CAC7B;;AACD,AAAA,MAAM,CACN;EACE,MAAM,EAAE,MAAM;CACf;;AACD,AAAA,OAAO,CAAA;EACL,aAAa,EAAE,GAAG;CACnB;;AACD,AAAA,YAAY,CAAA;EAEV,SAAS,EAAE,IAAI;CAEhB",
+    "sources": [
+        "Lab01Style.scss"
+    ],
+    "names": [],
+    "file": "Lab01Style.css"
+}
