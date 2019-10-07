@@ -18,14 +18,24 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script>
-       $(document).ready(init);
-        function init(){
-        $('#btn1').click(function (e) {
-            var height = $('#height').val() / 100;
-            var weight = $('#weight').val();
-            var result = weight / (height * height);
-            $('#result').html('BMI為:' + result);
-        })}
+        $(document).ready(init);
+        function init() {
+            $('#btn1').click(function (e) {
+                var height = $('#height').val() / 100;
+                var weight = $('#weight').val();
+                var result = weight / (height * height);
+                $('#result').html('BMI為:' + result);
+            })
+            checkall();
+        }
+        function checkall() {
+            $("#CheckAll").click(function () { 
+                    var check = $('#CheckAll').prop("checked");
+                    $("#CheckBoxGroup input").prop("checked",check);
+            })
+
+        }
+
 
 
     </script>
@@ -34,7 +44,9 @@
 <body>
 
     <div class="container">
+        
         <form>
+
             <div class="form-group">
 
                 <div class="col-md-3">身高:</br><input type="text" id="height" name="height"></div>
@@ -45,8 +57,27 @@
 
             <input class="btn btn-danger" type="button" id="btn1" value="calculate">
 
+
         </form>
+    
+    </hr>
+        <div class="row" style="margin:10px">
+            <div class="col-12">
+                <input id="CheckAll" type="checkbox" />勾選全部
+                <div id="CheckBoxGroup">
+                    <input type="checkbox" />項目1
+                    <input type="checkbox" />項目2
+                    <input type="checkbox" />項目3
+                    <input type="checkbox" />項目4
+                    <input type="checkbox" />項目5
+                    <input type="checkbox" />項目6
+                    <input type="checkbox" />項目7
+                    <input type="checkbox" />項目8
+                </div>
+            </div>
+        </div>
     </div>
+
 
 
 </body>
