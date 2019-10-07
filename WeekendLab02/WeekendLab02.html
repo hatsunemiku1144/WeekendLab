@@ -5,7 +5,7 @@
 
 <head>
     <link rel="stylesheet" href="Style/Lab2Style.css"">
-    <meta charset="UTF-8">
+    <meta charset=" UTF-8">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -17,7 +17,174 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 </head>
+
 <body>
-  
+    <header>
+        <nav class="navbar navbar-expand-sm bg-white navbar-light sticky-top">
+            <a class="navbar-brand" href="#">
+                BuildSchool
+            </a>
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Intro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Signup</a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <hr>
+    <!-- container head -->
+    <div class="container">
+        <!-- title -->
+        <div class="row">
+            <div class="headertext">
+                <section>
+                    <h1 style="font-size:60px;margin-bottom:7%"><b>Build School 是軟體開始教育先鋒，為學生打造更有競爭力的職涯</b></h1>
+                    <h2 style="margin-bottom:3%">START CODING AND GET COACHED FROM MENTORS.</h2>
+                    <button class="btn btn-outline-danger" style="margin-bottom:3%">Apply Now</button>
+                    <h3>這裡沒有考試，只有滿滿的程式碼</h3>
+                </section>
+            </div>
+        </div>
+        <!-- three card -->
+        <div class="row">
+
+            <div class="col col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Frontend</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">html css javascript</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Frontend</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">html css javascript</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Frontend</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">html css javascript</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of three card -->
+        <div class="row" id="center">
+            <img src="https://fakeimg.pl/550x300/?text=Hello" alt="fakeimg" style="margin: 0 auto">
+            <section class="centertext">
+                According to the W3C forms specification, the checked attribute is a boolean attribute, which means the
+                corresponding property is true if the attribute is present at all—even if, for example, the attribute
+                has no value or is set to empty string value or even "false". This is true of all boolean attributes.
+
+                Nevertheless, the most important concept to remember about the checked attribute is that it does not
+                correspond to the checked property. The attribute actually corresponds to the defaultChecked property
+                and should be used only to set the initial value of the checkbox. The checked attribute value does not
+                change with the state of the checkbox, while the checked property does. Therefore, the
+                cross-browser-compatible way to determine if a checkbox is checked is to use the property:
+                <span style="font-size:29px"></br></br></br> project-based-learning</span>
+            </section>
+
+        </div>
+        <section class="join">
+                <div class="container">
+                    <div class="signup-content">
+                        <h2>立刻加入</h2>
+                        <p>Welcome.</p>
+                        <div class="sign-form">
+                            <div>
+                                <div class="input-div">
+                                    <span><i class="fa fa-envelope"></i></span>
+                                    <input type="text" name="" id="" placeholder="Enter your name">
+                                </div>
+                            </div>
+        
+                            <div>
+                                <div class="input-div">
+                                    <span><i class="fa fa-lock"></i></span>
+                                    <input type="text" name="" id="" placeholder="Create password">
+                                </div>
+                            </div>
+        
+                            <div>
+                                <div class="input-div">
+                                    <span><i class="fa fa-phone"></i></span>
+                                    <input type="text" name="" id="" placeholder="Enter mobile number">
+                                </div>
+                            </div>
+                            <p>
+                                By joining, you agree to the Terms & Condiitions of Privacy Policy .
+                            </p>
+                            <a href="#" class>Sign Up</a>
+                        </div>
+        
+                    </div>
+                </div>
+            </section>
+
+    </div>
+    <!-- container foot -->
+    <footer>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white w3-hover-border-black" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">BuildSchool</a>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">About</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </footer>
 </body>
