@@ -19,8 +19,14 @@
         <script>
                 function check() 
                 {
-                    if(document.getElementById("MustCheck").checked !=true)
+                    if(document.getElementById("MustCheck").checked!=true)
                     {
+                        document.getElementById('bodytext').innerHTML="請勾選我同意本系統同意條款..."
+                        $('#myModal').modal('show'); 
+                    }
+                    else
+                    {
+                        document.getElementById('bodytext').innerHTML="登入成功"
                         $('#myModal').modal('show'); 
                     }
                 }
@@ -70,7 +76,8 @@
 
                                                 <!-- Modal body -->
                                                 <div class="modal-body">
-                                                    請勾選我同意本系統同意條款...
+                                                    <span id="bodytext">請勾選我同意本系統同意條款...</span>
+                                                    
                                                 </div>
 
                                                 <!-- Modal footer -->

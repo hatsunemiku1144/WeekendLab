@@ -11,10 +11,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script>
-                function check() 
+               function check() 
                 {
-                    if(document.getElementById("MustCheck").checked !=true)
+                    if(document.getElementById("MustCheck").checked!=true)
                     {
+                        document.getElementById('bodytext').innerHTML="請勾選我同意本系統同意條款..."
+                        $('#myModal').modal('show'); 
+                    }
+                    else
+                    {
+                        document.getElementById('bodytext').innerHTML="註冊成功"
                         $('#myModal').modal('show'); 
                     }
                 }
@@ -76,7 +82,7 @@
 
                                                 <!-- Modal body -->
                                                 <div class="modal-body">
-                                                        請勾選我同意本系統同意條款...
+                                                        <span id="bodytext">請勾選我同意本系統同意條款...</span>
                                                 </div>
 
                                                 <!-- Modal footer -->
