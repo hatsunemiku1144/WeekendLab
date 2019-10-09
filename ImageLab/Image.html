@@ -18,7 +18,22 @@
         function init() {
             $("#sel01").change(changeradius);
             $("img").hover(changesize1, changesize2);
+            $('#btn1').click(function (e) {
+                var height = $('#height').val() / 100;
+                var weight = $('#weight').val();
+                var result = weight / (height * height);
+                $('#result').html('BMI為:' + result);
+            })
+            checkall();
         }
+        function checkall() {
+            $("#CheckAll").click(function () { 
+                    var check = $('#CheckAll').prop("checked");
+                    $("#CheckBoxGroup input").prop("checked",check);
+            })
+
+        }
+
         function changeradius() {
             var val = $(this).val();
             $('#ImgGroup2 img').removeClass();
@@ -49,6 +64,42 @@
 </head>
 
 <body>
+        <div class="container">
+        
+                <form>
+        
+                    <div class="form-group">
+        
+                        <div class="col-md-3">身高:</br><input type="text" id="height" name="height"></div>
+                        <div class="col-md-3">體重:</br><input type="text" id="weight" name="weight"></div>
+                    </div>
+        
+                    <span id="result">BMI為:</span></br>
+        
+                    <input class="btn btn-danger" type="button" id="btn1" value="calculate">
+        
+        
+                </form>
+            
+            </hr>
+                <div class="row" style="margin:10px">
+                    <div class="col-12">
+                        <input id="CheckAll" type="checkbox" />勾選全部
+                        <div id="CheckBoxGroup">
+                            <input type="checkbox" />項目1
+                            <input type="checkbox" />項目2
+                            <input type="checkbox" />項目3
+                            <input type="checkbox" />項目4
+                            <input type="checkbox" />項目5
+                            <input type="checkbox" />項目6
+                            <input type="checkbox" />項目7
+                            <input type="checkbox" />項目8
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
     <div id="ImgGroup2" class="row" style="margin:10px; padding-top:100px">
         <div class="col-12" style="padding-bottom: 20px">
             <select id="sel01" >
