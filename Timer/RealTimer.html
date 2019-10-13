@@ -10,30 +10,67 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <!-- Bootstrap CSS -->
-    
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
+        var input;
+        var isPause = false;
+        var isStart = false;
         $(document).ready(function () {
-        $('#button1').click(startwatch);
-        $('#button2').click(stopwatch);
-        });
-        function startwatch()
-        {
-            setwatch()
-        }; 
-        function stopwatch()
-        {
 
+            $('#button1').click(startwatch);
+            $('#button2').click(stopwatch);
+        });
+        function startwatch() {
+            if(isStart == false)
+            {
+            setwatch();
+            countdown();
+            }
+            if(isStart == true && isPause== true)
+            {
+            recountdown();
+            }
+           
         };
-        function setwatch()
-        {
-            var input = $('#input').val.toString();
-            $('#clock').html(input);
+      
+        function setwatch() {
+            input = $('#input').val();
+            isPause = false;
+            isStart = true;
         }
+        function countdown() {
+            if(isPause == false){
+                if(input==0){
+                    $('#clock').html("0");
+                    alert("time's up!");
+                }
+                else{
+                $('#clock').html(input);
+                input = input - 1;
+                setTimeout(countdown, 1000);
+                }
+            }
+        }
+        function recountdown()
+        {
+                if(input==0){
+                    $('#clock').html("0");
+                    alert("time's up!");
+                }
+                
+                $('#clock').html($('#clock').html());
+                setTimeout(countdown, 1000);
+                isPause = false;
+            
+        }
+        function stopwatch() {
+            isPause = true;
+        };
     </script>
     <style>
         @font-face {
