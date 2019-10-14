@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -42,22 +43,27 @@
             input = $('#input').val();
             isPause = false;
             isStart = true;
+            // $('#button2').prop("disabled", true);
         }
         function countdown() {
+         
             if(isPause == false){
                 if(input==0){
                     $('#clock').html("0");
                     alert("time's up!");
+                   
                 }
                 else{
                 $('#clock').html(input);
                 input = input - 1;
                 setTimeout(countdown, 1000);
+                $('#button2').prop("disabled", false);
                 }
             }
         }
         function recountdown()
         {
+               $('#button2').prop("disabled", true);
                 if(input==0){
                     $('#clock').html("0");
                     alert("time's up!");
@@ -69,8 +75,13 @@
             
         }
         function stopwatch() {
+            $('#button1').prop("disabled", true);
             isPause = true;
+            invokebtn1();
         };
+        function invokebtn1(){
+             setTimeout( function(){$('#button1').prop("disabled", false)}, 1000);
+        }
     </script>
     <style>
         @font-face {
