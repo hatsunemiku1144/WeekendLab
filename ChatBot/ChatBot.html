@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-hant-tw">
+
+<head>
+    <title>Translator</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script>
+        var clickbtn;
+        var result;
+        $(function () {
+            $('#TranslateForward').click(TranslateForward);
+            $('#TranslateBackward').click(TranslateBackward);
+        });
+        function TranslateForward() {
+            // clickbtn = 0;
+            Translate();
+
+        }
+        function TranslateBackward() {
+            // clickbtn = 1;
+            Translate();
+
+        }
+        function Translate() {
+            $.ajax({
+                type: "post", //http verb
+                headers: {
+                    //http header
+                    "Authorization":"EndpointKey d276c36e-dbc4-4058-8bfd-6dd2ed3806ea",
+                    "Content-Type":"application/json"
+                },
+                url: "https://remembertodeletethis.azurewebsites.net/qnamaker/knowledgebases/e26549b6-3003-48e9-8a1e-b81620db9573/generateAnswer",
+                data: JSON.stringify({ 'question': $('#text1').val() }), //要翻譯的文字
+                dataType: "json",
+                success: function (response) {
+                        console.log(response);
+                        result =response.answers[0].answer;
+                        $('#text2').val(result);
+    
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col col-4">
+                <div class="card" style="background-color:cadetblue; border-color:darkblue;">
+                    <div class="card-body" style="align-self: center;">
+                        <h4 class="card-title text-center">請輸入中文</h4>
+                        <textarea name="" id="text1" cols="30" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto row d-flex flex-column justify-content-center mt-5">
+
+                        <div class="col" style="text-align: center">
+                            <button class="btn btn-primary center-block" id="TranslateForward">--></button>
+                     </div>
+                         <div class="col" style="text-align: center">
+                     <button class="btn btn-primary center-block" id="TranslateBackward">
+                        <--</button> 
+                    </div> 
+                 </div> 
+               
+            <div class="col col-4">
+                            <div class="card" style="background-color:cadetblue; border-color:darkblue;">
+                                <div class="card-body text-center" style="align-self: center;">
+                                    <h4 class="card-title">翻譯為:</h4>
+                                    <textarea name="" id="text2" cols="30" rows="5"></textarea>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div> 
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+</body>
+
+</html>

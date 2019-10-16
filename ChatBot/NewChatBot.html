@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-hant-tw">
+
+<head>
+    <title>ChatBot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script>
+        var result;
+        $(function () {
+            $('#ButtonSend').click(chat);
+            $('#inputText').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    chat();
+                    return false;
+                }
+            });
+        });
+        function chat() {
+            var str = $('#inputText').val();
+            $('#TalkContainer').append("顧客:" + str + "</br>");
+            getAnswer(str, function (response) {
+               let result = response.answers[0].answer;
+
+                $('#TalkContainer').append("店員：" + result + "</br>");
+
+                $('#TalkContainer').scrollTop($('#TalkContainer')[0].scrollHeight);
+
+            })
+
+        }
+        function getAnswer(msg,whensuccess) {
+            $.ajax({
+                type: "post", //http verb
+                headers: {
+                    //http header
+                    "Authorization": "EndpointKey d276c36e-dbc4-4058-8bfd-6dd2ed3806ea",
+                    "Content-Type": "application/json"
+                },
+                url: "https://remembertodeletethis.azurewebsites.net/qnamaker/knowledgebases/e26549b6-3003-48e9-8a1e-b81620db9573/generateAnswer",
+                data: JSON.stringify({ 'question': msg }), //要翻譯的文字
+                dataType: "json",
+                success: whensuccess,
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+
+    <body>
+        <div class="row" style="margin: 10px">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <!-- 卡片  -->
+                <div class="card">
+                    <!-- 卡片標題 -->
+                    <span class="card-header bg-primary" style="color:white">
+                        對談機器人
+                    </span>
+                    <!-- 卡片內容 -->
+                    <div class="card-body">
+                        <!-- 對談區 -->
+                        <div id="TalkContainer" style="overflow: auto; height: 300px;">
+                        </div>
+                    </div>
+                </div>
+                <form class="form-inline">
+                    <input id="inputText" class="form-control" style="width:88%">
+                    <button type="button" id="ButtonSend" class="btn btn-primary">送出</button>
+                </form>
+            </div>
+            <div class="col-2"></div>
+    </body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+</body>
+
+</html>
