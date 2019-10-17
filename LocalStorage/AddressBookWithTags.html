@@ -24,6 +24,9 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
     <script>
+         var dat = [
+            ['Eric', '0912345678', '1980/1/1', 'eric@gmail.com', '台北市光復南路179號13樓','123']
+        ];
         $(function () {
             init();
             Load();
@@ -81,6 +84,7 @@
                 dat[n] = NewItem;
                 $('#Edittags').tagsInput();
                 Refresh();
+                Reset();
                 Save();
             });
         });
@@ -104,7 +108,11 @@
         function Refresh() {
             MyTable.clear();
             MyTable.rows.add(dat);
+            console.log(dat);
             MyTable.draw();
+        }
+        function Reset()
+        {
             $('#ModalName').val('');
             $('#ModalBirthdate').val('');
             $('#Modaltel').val('');
@@ -112,24 +120,21 @@
             $('#ModalAddress').val('');
             $('#ModalAddress').val('');
             $('#tags').importTags('');
-
-            
-
         }
         function Save() {
             localStorage.setItem("names", JSON.stringify(dat));
         }
         function Load() {
+        
             if (localStorage.getItem != null) {
-                dat = JSON.parse(localStorage.getItem("names"))
+           dat = JSON.parse(localStorage.getItem("names"))
             }
             $('#tags').tagsInput();
             $('#Edittags').tagsInput();
             Refresh()
         }
-        var dat = [
-            ['Eric', '0912345678', '1980/1/1', 'eric@gmail.com', '台北市光復南路179號13樓',"123"],
-        ];
+       
+     
     </script>
     <!-- Bootstrap CSS -->
 

@@ -29,7 +29,7 @@
             $('#TalkContainer').append("顧客:" + str + "</br>");
             getAnswer(str, function (response) {
                let result = response.answers[0].answer;
-               if(result="No good match found in KB."){
+               if(result=="No good match found in KB."){
                    result ="你的問題太難了吧";
                }
 
@@ -39,6 +39,7 @@
                 $('#TalkContainer').scrollTop($('#TalkContainer')[0].scrollHeight);
 
             })
+            $('#inputText').val('');
 
         }
         function getAnswer(msg,whensuccess) {
