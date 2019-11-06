@@ -1,0 +1,13 @@
+.puzzle {
+    background-image:url(images/picture.png);
+    width:256px;
+    height:256px;
+ }
+ 
+ .piece1 {
+    background-position:0 0
+ }
+ 
+ .piece2 {
+    background-position:-128px -128px
+ }

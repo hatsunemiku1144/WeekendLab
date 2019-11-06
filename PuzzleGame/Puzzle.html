@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>PuzzleGame</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link  rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script>
+        var puzzle = new Array;
+        var difficulty = 0;
+        var inversion = 0;
+        var x = document.getElementById("myCanvas");
+        $(function () {
+            $('#btn').click(Random);
+            $('#btnclr').click(Clear);
+            $('#btneasy').click(easy);
+            $('#btnmedium').click(medium);
+        });
+        function Random() {
+            puzzle = [];
+            let i = 0;
+            while (puzzle.length < difficulty) {
+                var number = Math.floor(Math.random() * difficulty);
+                if (puzzle.indexOf(number) == -1) {
+                    puzzle[i] = number;
+                    i++
+                }
+
+            }
+            console.log(puzzle);
+        }
+        function easy() {
+            difficulty = 9;
+            do {
+                Random()
+            }
+            while (isSolvable(puzzle) == false)
+            console.log(puzzle);
+            console.log(inversion);
+        }
+        function medium() {
+            difficulty = 16;
+            Random();
+
+        }
+        function Clear() {
+            puzzle = [];
+            console.log(puzzle);
+        }
+        function isSolvable(input) {
+           inversion = 0;
+            for (let i = 0; i < input.length - 1; i++) {
+                for (let j = i + 1; j < input.length; j++) {
+                    if (input[i] > input[j] && i < j&&input[i]&&input[j]) {
+                        inversion++;
+                    }
+                }
+            }
+            if (inversion % 2 == 0) {
+                return true;
+            }
+            else return false;
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+    <button id="btn" class="btn btn-primary">clickme</button>
+    <button id="btnclr" class="btn btn-primary">clear</button>
+    <button id="btneasy" class="btn btn-primary">easy</button>
+    <button id="btnmedium" class="btn btn-primary">medium</button>
+    </div>
+    <div class="puzzle">
+    <div class="puzzle piece1"></div>
+    <div class="puzzle piece2"></div>
+</div>
+</body>
+
+</html>
