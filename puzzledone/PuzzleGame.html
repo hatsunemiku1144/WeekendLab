@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PuzzleGame</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        #dvPuzzle {
+            width: 490px;
+            height: 490px;
+            border: solid 5px lightgreen;
+            padding: 0px;
+        }
+        .PicCell {
+            border-top: solid 1px green;
+            border-left: solid 1px green;
+            border-right: solid 1px green;
+            border-bottom: solid 1px green;
+            float: left;
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        var randomfinish = false;
+        var difficulty = 3;
+        var Size;
+        var posConv = [];
+        var temppos = [];
+        var saveLost;
+        $(document).ready(function () {
+            selectPuzzle(difficulty);
+            $('#selectLevel').change(function (e) {
+                difficulty = $('#selectLevel').val();
+                selectPuzzle(difficulty);
+            });
+        });
+        function selectPuzzle(Sidelength) {
+            $('#dvPuzzle .PicCell').remove();
+            for (let i = 0; i < Sidelength * Sidelength; i++) {
+                Size = 480 / Sidelength;
+                $("#dvPuzzle").append(
+                `<div class='PicCell' id='Pic${i}' style="width:${Size}px;height:${Size}px;">
+                <img width="480px" height="480px" src='image0.jpg'></div>`);
+                let row = parseInt(i / Sidelength);
+                let col = i % Sidelength;
+                $(`#Pic${i} img`).css("margin-left", col * -Size).css("margin-top", row * -Size);
+                posConv[i] = {
+                    row: row,
+                    col: col
+                };
+                temppos[i] = `Pic${i}`;
+            }
+            saveLost = $(`#Pic${difficulty * difficulty - 1} img`)
+            saveLost.remove();
+            $(".PicCell").click(ImgToMove);
+            $("input:button").click(RandomButton);
+        }
+        function ImgToMove() {
+            let cells = $("#dvPuzzle div");
+            let i = cells.index(this);
+            let toCheck = getNearPos(i, difficulty);
+            while (toCheck.length > 0) {
+                let j = toCheck.pop();
+                if (cells.eq(j).attr("id") == `Pic${difficulty * difficulty - 1}`) {
+                    if (i > j) {
+                        let k = j;
+                        j = i;
+                        i = k;
+                    }
+                    let ahead = cells.eq(i);
+                    let behind = cells.eq(j);
+                    let behindPrev = behind.prev();
+                    if (Math.abs(i - j) == 1) {
+                        behind.after(ahead);
+                    } else {
+                        ahead.after(behind);
+                        behindPrev.after(ahead);
+                    }
+                }
+            }
+            if(randomfinish==true){
+            checkwin();
+            }
+        }
+        function getNearPos(i, Sidelength) {
+            let pool = [];
+            let row = posConv[i].row, col = posConv[i].col;
+            if (row > 0)
+                pool.push((row - 1) * Sidelength + col);
+            if (row < Sidelength - 1)
+                pool.push((row + 1) * Sidelength + col);
+            if (col > 0)
+                pool.push(i - 1);
+            if (col < Sidelength - 1)
+                pool.push(i + 1);
+            return pool;
+        }
+        function checkwin() {
+            let check = [];
+            for (let i = 0; i < $('.PicCell').length; i++) {
+                check.push($('.PicCell')[i]['id']);
+            }
+            if (check.toString() == temppos.toString()) {
+                $('#modal').modal();
+                $(".PicCell").off("click");
+                $("input:button").off("click");
+                $(`#Pic${difficulty * difficulty - 1}`).append(saveLost);
+            }
+        }
+        function RandomButton() {
+            for (let i = 0; i < 500; i++) {
+                let cells = $("#dvPuzzle div");
+                let toMove = getNearPos(cells.index($(`#Pic${difficulty * difficulty - 1}`)[0]), difficulty);
+                cells.eq(toMove[parseInt(Math.random() * toMove.length)]).click();
+            }
+            randomfinish = true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 offset-4 text-center ">
+                <input name="Random" id="Random" class="btn btn-primary  my-2" type="button" value="亂數">
+            </div>
+        </div>
+        <img src="" alt="" sizes="600" srcset="">
+        <div class="dvPuzzle container-fluid" id="dvPuzzle"></div>
+    </div>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <span>Congratulation!</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

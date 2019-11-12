@@ -2,6 +2,23 @@
 <html lang="en">
 
 <head>
+    <style>
+      #puzzle-wrap {
+            width: 490px;
+            height: 490px;
+            border: solid 5px black;
+            padding: 0px;
+        }
+    .PicCell{
+        border-top: solid 1px green;
+            border-left: solid 1px green;
+            border-right: solid 1px green;
+            border-bottom: solid 1px green;
+            float: left;
+            overflow: hidden;
+    }
+    
+    </style>
     <title>PuzzleGame</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -20,10 +37,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script>
-        var puzzle = new Array;
-        var difficulty = 0;
+        var cell = Array;
+        var difficulty = 3;
         var inversion = 0;
-        var x = document.getElementById("myCanvas");
+        var wincell = Array;
         $(function () {
             $('#btn').click(Random);
             $('#btnclr').click(Clear);
@@ -31,26 +48,34 @@
             $('#btnmedium').click(medium);
         });
         function Random() {
-            puzzle = [];
             let i = 0;
-            while (puzzle.length < difficulty) {
+            while (cell.length < difficulty) {
                 var number = Math.floor(Math.random() * difficulty);
-                if (puzzle.indexOf(number) == -1) {
-                    puzzle[i] = number;
+                if (cell.indexOf(number) == -1) {
+                    cell[i] = number;
                     i++
                 }
-
             }
-            console.log(puzzle);
         }
         function easy() {
             difficulty = 9;
+            wincell = [];
             do {
+                cell = [];
                 Random()
             }
-            while (isSolvable(puzzle) == false)
-            console.log(puzzle);
-            console.log(inversion);
+            while (isSolvable(cell) == false)
+            createCell(difficulty);
+           
+            for(let x = 0; x<difficulty-1;x++){
+                wincell[x]=x+1;
+            }
+            wincell[8] = 0;
+            console.log(cell);
+            console.log(wincell);
+          
+          
+
         }
         function medium() {
             difficulty = 16;
@@ -58,8 +83,8 @@
 
         }
         function Clear() {
-            puzzle = [];
-            console.log(puzzle);
+            cell = [];
+            console.log(cell);
         }
         function isSolvable(input) {
            inversion = 0;
@@ -73,22 +98,35 @@
             if (inversion % 2 == 0) {
                 return true;
             }
-            else return false;
+            else {
+                return false};
+        }
+        function createCell(difficulty){//依照難度去切割格子
+            let  div = document.getElementById('puzzle-wrap');
+            let border = `${480/(difficulty/3)}px`;
+            while(div.firstChild){
+                div.removeChild(div.firstChild);
+            }//這個WhileLoop會清除原有格子的所有DIV，才不會讓之後產生的DIV重複
+            for(let x = 0; x < difficulty ;x++){
+               div = document.createElement('div');
+               div.style.width=border;
+               div.style.height=border;
+               div.setAttribute("id","cell"+x);
+               div.className="PicCell";
+               document.getElementById('puzzle-wrap').appendChild(div);
+            }//這個ForLoop使Puzzle-Wrapper可以依照難度生成格子
         }
     </script>
 </head>
 
 <body>
-    <div>
+    <div class = 'text-center'>
     <button id="btn" class="btn btn-primary">clickme</button>
     <button id="btnclr" class="btn btn-primary">clear</button>
-    <button id="btneasy" class="btn btn-primary">easy</button>
-    <button id="btnmedium" class="btn btn-primary">medium</button>
+    <button id="btneasy" value="3" class="btn btn-primary">easy</button>
+    <button id="btnmedium" value="4" class="btn btn-primary">medium</button>
     </div>
-    <div class="puzzle">
-    <div class="puzzle piece1"></div>
-    <div class="puzzle piece2"></div>
-</div>
+    <div class = "container-fluid" id = "puzzle-wrap" ></div>
 </body>
 
 </html>
